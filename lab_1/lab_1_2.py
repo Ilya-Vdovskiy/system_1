@@ -8,13 +8,14 @@ def get_g(N, m):
 
 def get_res(size):
     N = []
+    n = size
 
     for i in range(size):
         rand = random.random()
         N.append(rand ** 2/3)
 
-    MX = 3/5
-    DX = 12/175
+    MX = (n+1) / (n + 2)
+    DX = (n + 1) / ((n + 3) * (n + 2) ** 2)
 
     m = get_m(N)
     g = get_g(N, m)
@@ -26,6 +27,7 @@ get_res(100)
 get_res(1000)
 get_res(10000)
 get_res(100000)
+
 
 def print_first_values(size, q):
     print(f"\nПервые {q} значений из N={size}:")

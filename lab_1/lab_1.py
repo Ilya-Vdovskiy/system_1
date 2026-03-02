@@ -1,28 +1,24 @@
-import random
+import pandas as pd
+from solutions import solutions
 
-def get_m(N):
-    return sum(N) / len(N)
+N_values = [100, 500, 1000, 10000]
+rows = []
 
-def get_p(N, m):
-    return sum(x ** 2 for x in N) / len(N) - m ** 2
+for N in N_values:
+    mx, m, d1, dx, g, d2 = solutions.variant_11(N)
+    rows.append([N, m, mx, d1, g, dx, d2])
 
-def get_res(size):
-    N = []
+df = pd.DataFrame(rows, columns=["N", "m", "Mx", "delta1", "g", "Dx", "delta2"])
+df_round = df.round(4)
 
-    for i in range(size):
-        rand = random.random()
-        N.append(rand**(1/3))
-    
-    Mx = 3/4
-    Dx = 3/80
+print("=" * 80)
+print("Результаты моделирования")
+print("=" * 80)
 
-    m = get_m(N)
-    p = get_p(N, m)
+print(f"{'N':<10} {'m':<12} {'Mx':<12} {'delta1':<12} {'g':<12} {'Dx':<12} {'delta2':<12}")
+print("-" * 80)
 
-    print("%d \t| %.6f \t| %.6f \t| %.6f \t| %.6f \t| %.6f \t| %.6f \t|" % (len(N), Mx, m, abs(Mx-m), Dx, p, abs(Dx-p)))
+for _, row in df_round.iterrows():
+    print(f"{int(row['N']):<10} {row['m']:<12.4f} {row['Mx']:<12.4f} {row['delta1']:<12.4f} {row['g']:<12.4f} {row['Dx']:<12.4f} {row['delta2']:<12.4f}")
 
-print("N \t| MX\t\t| m\t\t| delta 1\t| DX\t\t| g\t\t| delta 2 \t|")
-get_res(100)
-get_res(1000)
-get_res(10000)
-get_res(100000)
+print("=" * 80)

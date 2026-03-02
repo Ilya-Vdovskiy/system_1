@@ -8,13 +8,14 @@ def get_g(N, m):
 
 def get_res(size):
     N = []
+    n = size
 
     for i in range(size):
         rand = random.random()
         N.append(rand ** 1/5)
 
-    MX = 5/6
-    DX = 5/252
+    MX = (n+1) / (n + 2)
+    DX = (n + 1) / ((n + 3) * (n + 2) ** 2)
 
     m = get_m(N)
     g = get_g(N, m)
